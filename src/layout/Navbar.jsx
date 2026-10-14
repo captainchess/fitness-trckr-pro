@@ -14,8 +14,8 @@ export default function Navbar() {
           <a onClick={() => logout()}>Log out</a>
         ) : (
           <>
-            <NavLink to="/auth/register">Register</NavLink>
-            <NavLink to="/auth/login">Login</NavLink>
+            <NavLink to="/register">Register</NavLink>
+            <NavLink to="/login">Login</NavLink>
           </>
         )}
       </nav>

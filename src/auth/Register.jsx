@@ -32,10 +32,10 @@ export default function Register() {
           Password
           <input type="password" name="password" required />
         </label>
-        <Link to="/auth/register">Register</Link>
+        <Link to="/register">Register</Link>
         {error && <p role="alert">{error}</p>}
       </form>
-      <Link to="/auth/login">
+      <Link to="/login">
         Already have an account? Log in here.
       </Link>
     </>
