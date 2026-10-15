@@ -24,8 +24,19 @@ export default function RoutinesDetails() {
   return (
     <>
       <p>Hello Details {routine.name}</p>
+      <ul>
+        <p>List</p>
+        
+        {routine.sets.map((set) => (
+           <Sets key={set.id} set={set} />
+        ))}
+      </ul>
     </>
   );
+}
+
+function Sets({ set }) {
+    return <li>{set.name}</li>
 }
 
 /**
