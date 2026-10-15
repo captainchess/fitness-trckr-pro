@@ -58,14 +58,11 @@ export async function deleteActivity(token, id) {
 
 export async function getDetails(id) {
   try {
-    const response = await fetch(API + `/activities/${id}`, {
-      method: "GET",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(id),
-    });
+    const response = await fetch(API + `/activities/${id}`);
     const result = await response.json();
-    return result.data;
+    return result;
   } catch (e) {
     console.error(e);
+    return null;
   }
 }

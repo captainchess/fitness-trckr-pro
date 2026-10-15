@@ -15,11 +15,11 @@ export default function ActivityDetails() {
    * 6. Move the delete button to this componenet
    * 7. User should be redirected back to the list after delete is clicked
    */
+  const { id } = useParams();
   const { token } = useAuth();
   const [error, setError] = useState(null);
+  const [details, setDetails] = useState(id);
   const navigate = useNavigate();
-  const { id } = useParams();
-  const [details, setDetails] = useState();
 
   const tryDelete = async () => {
     setError(null);
@@ -38,6 +38,8 @@ export default function ActivityDetails() {
     };
     syncDetails();
   }, [id]);
+
+  console.debug(details);
 
   return (
     <section>
