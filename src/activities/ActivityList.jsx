@@ -17,20 +17,6 @@ export default function ActivityList({ activities, syncActivities }) {
 }
 
 function ActivityListItem({ activity, syncActivities }) {
-  const { token } = useAuth();
-
-  const [error, setError] = useState(null);
-
-  const tryDelete = async () => {
-    setError(null);
-
-    try {
-      await deleteActivity(token, activity.id);
-      syncActivities();
-    } catch (e) {
-      setError(e.message);
-    }
-  };
 
   return (
     <li>

@@ -1,35 +1,49 @@
 import { useParams } from "react-router";
-import  { getDetails } from "../api/activities.js";
+import { getDetails } from "../api/activities.js";
 import { useEffect, useState } from "react";
 
 export default function ActivityDetails() {
-    /**
-     * 1. useParams to get the activity id
-     * 2. Write a function in activities.js to fetch details of activity
-     * 3. Write a function here to try gettting details(activity name, description, creator name)
-     * 4. Catch any errors...what kind of errors???
-     * 5. Display the details on the page
-     * 6. Move the delete button to this componenet
-     */
-    
-    const {id} = useParams();
-    const [ details, setDetails] = useState();
+  /**
+   * 1. useParams to get the activity id
+   * 2. Write a function in activities.js to fetch details of activity
+   * 3. Write a function here to try gettting details(activity name, description, creator name)
+   * 4. Catch any errors...what kind of errors???
+   * 5. Display the details on the page
+   * 6. Move the delete button to this componenet
+   * 7. User should be redirected back to the list after delete is clicked
+   */
+  const { token } = useAuth();
 
-    const syncDetails = async () => {
-        const details = await getDetails();
-        setDetails(details);
+  const [error, setError] = useState(null);
+
+  const tryDelete = async () => {
+    setError(null);
+
+    try {
+      await deleteActivity(token, activity.id);
+      syncActivities();
+    } catch (e) {
+      setError(e.message);
     }
-    
-    useEffect(() => {
-        syncDetails()
-    }, []);
+  };
 
-    return (
-        <section>
-            <h2>{details.name}</h2>
-            <p>{details.description}</p>
-            {token && <button onClick={tryDelete}>Delete</button>}
-        </section>
-    );
+  const { id } = useParams();
+  const [details, setDetails] = useState();
 
+  const syncDetails = async () => {
+    const details = await getDetails(id);
+    setDetails(details);
+  };
+
+  useEffect(() => {
+    syncDetails();
+  }, []);
+
+  return (
+    <section>
+      <h2>{details.name}</h2>
+      <p>{details.description}</p>
+      {token && <button onClick={tryDelete}>Delete</button>}
+    </section>
+  );
 }
