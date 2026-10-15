@@ -2,6 +2,8 @@ import { useParams } from "react-router";
 import { getDetails } from "../api/activities.js";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { useAuth } from "../auth/AuthContext.jsx";
+import { deleteActivity } from "../api/activities.js";
 
 export default function ActivityDetails() {
   /**
@@ -16,26 +18,24 @@ export default function ActivityDetails() {
   const { token } = useAuth();
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { id } = useParams();
+  const [details, setDetails] = useState();
 
   const tryDelete = async () => {
     setError(null);
     try {
-      await deleteActivity(token, activity.id);
+      await deleteActivity(token, id);
       navigate("/activities");
     } catch (e) {
       setError(e.message);
     }
   };
 
-  const { id } = useParams();
-  const [details, setDetails] = useState();
-
-  const syncDetails = async () => {
-    const details = await getDetails(id);
-    setDetails(details);
-  };
-
   useEffect(() => {
+    const syncDetails = async () => {
+      const details = await getDetails(id);
+      setDetails(details);
+    };
     syncDetails();
   }, [id]);
 
