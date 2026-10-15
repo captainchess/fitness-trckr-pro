@@ -31,15 +31,14 @@ export default function ActivityDetails() {
     }
   };
 
-  useEffect(() => {
-    const syncDetails = async () => {
+  const syncDetails = async (id) => {
       const details = await getDetails(id);
       setDetails(details);
     };
-    syncDetails();
-  }, [id]);
 
-  console.debug(details);
+  useEffect(() => {
+    syncDetails(id);
+  }, [id]);
 
   return (
     <section>

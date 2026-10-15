@@ -66,3 +66,14 @@ export async function getDetails(id) {
     return null;
   }
 }
+
+export async function getRoutines() {
+  try {
+    const response = await fetch(API + "/routines");
+    const result = await response.json();
+    return result;
+  } catch (e) {
+    console.error(e);
+    return [];
+  }
+}

@@ -1,0 +1,24 @@
+import { useEffect, useState } from "react";
+import { getRoutines } from "../api/activities";
+
+import RoutinesList from "./RoutinesList";
+
+export default function RoutinesPage() {
+    const [ routines, setRoutines ] = useState();
+
+    const syncRoutines = () => {
+        const data = getRoutines();
+        setRoutines(data);
+    };
+
+    useEffect(() => {
+        syncRoutines();
+    }, []);
+    
+    return (
+        <>
+            <h1>Routines</h1>
+            <RoutinesList routines={routines} />
+        </>
+    )
+}
