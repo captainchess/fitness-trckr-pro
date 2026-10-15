@@ -1,5 +1,5 @@
 import { useAuth } from "../auth/AuthContext";
-import { NavLink, Link } from "react-router";
+import { NavLink } from "react-router";
 
 /** Navbar with site navigation links */
 export default function Navbar() {
@@ -10,6 +10,7 @@ export default function Navbar() {
       <p>Fitness Trackr</p>
       <nav>
         <NavLink to="/">Activities</NavLink>
+        <NavLink to="/routines">Routines</NavLink>
         {token ? (
           <a onClick={() => logout()}>Log out</a>
         ) : (

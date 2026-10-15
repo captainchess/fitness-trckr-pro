@@ -4,10 +4,10 @@ import { getRoutines } from "../api/activities";
 import RoutinesList from "./RoutinesList";
 
 export default function RoutinesPage() {
-    const [ routines, setRoutines ] = useState();
+    const [ routines, setRoutines ] = useState([]);
 
-    const syncRoutines = () => {
-        const data = getRoutines();
+    const syncRoutines = async () => {
+        const data = await getRoutines();
         setRoutines(data);
     };
 
