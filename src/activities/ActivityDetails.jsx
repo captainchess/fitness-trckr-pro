@@ -18,7 +18,7 @@ export default function ActivityDetails() {
   const { id } = useParams();
   const { token } = useAuth();
   const [error, setError] = useState(null);
-  const [details, setDetails] = useState(id);
+  const [details, setDetails] = useState();
   const navigate = useNavigate();
 
   const tryDelete = async () => {
@@ -39,12 +39,14 @@ export default function ActivityDetails() {
   useEffect(() => {
     syncDetails(id);
   }, [id]);
+  
+  if (!details) return <p>Loading...</p>;
 
   return (
     <section>
-      <p><h4>Activity:</h4> {details.name}</p>
-      <p><h4>Name:</h4> {details.creatorName}</p>
-      <p><h4>Details:</h4> {details.description}</p>
+      <h4>Activity:</h4> <p>{details.name}</p>
+      <h4>Name:</h4> <p>{details.creatorName}</p>
+      <h4>Details:</h4> <p>{details.description}</p>
       {token && <button onClick={tryDelete}>Delete</button>}
       {error && <p role="alert">{error}</p>}
     </section>
