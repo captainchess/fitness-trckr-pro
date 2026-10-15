@@ -43,8 +43,9 @@ export default function ActivityDetails() {
 
   return (
     <section>
-      <h2>{details.name}</h2>
-      <p>{details.description}</p>
+      <p><h4>Activity:</h4> {details.name}</p>
+      <p><h4>Name:</h4> {details.creatorName}</p>
+      <p><h4>Details:</h4> {details.description}</p>
       {token && <button onClick={tryDelete}>Delete</button>}
       {error && <p role="alert">{error}</p>}
     </section>
