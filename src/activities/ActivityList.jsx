@@ -22,7 +22,6 @@ function ActivityListItem({ activity, syncActivities }) {
     <li>
       <p>{activity.name}</p>
       <Link to={`/activities/${activity.id}`}>Details</Link>
-      {error && <p role="alert">{error}</p>}
     </li>
   );
 }

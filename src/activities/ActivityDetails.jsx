@@ -1,6 +1,7 @@
 import { useParams } from "react-router";
 import { getDetails } from "../api/activities.js";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
 export default function ActivityDetails() {
   /**
@@ -13,15 +14,14 @@ export default function ActivityDetails() {
    * 7. User should be redirected back to the list after delete is clicked
    */
   const { token } = useAuth();
-
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const tryDelete = async () => {
     setError(null);
-
     try {
       await deleteActivity(token, activity.id);
-      syncActivities();
+      navigate("/activities");
     } catch (e) {
       setError(e.message);
     }
@@ -37,13 +37,14 @@ export default function ActivityDetails() {
 
   useEffect(() => {
     syncDetails();
-  }, []);
+  }, [id]);
 
   return (
     <section>
       <h2>{details.name}</h2>
       <p>{details.description}</p>
       {token && <button onClick={tryDelete}>Delete</button>}
+      {error && <p role="alert">{error}</p>}
     </section>
   );
 }
